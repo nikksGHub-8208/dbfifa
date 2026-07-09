@@ -42,6 +42,10 @@
               <label for="betAmountInput"><strong>Entry Fee / match (₹)</strong></label>
               <input id="betAmountInput" type="number" min="1" step="1" value="20" />
             </div>
+            <div class="bet-control" style="margin-left:12px">
+              <label for="betFirstScorerInput"><strong>First-scorer fee / match (₹)</strong></label>
+              <input id="betFirstScorerInput" type="number" min="1" step="1" value="10" />
+            </div>
             <div class="btn-row">
               <button id="saveBtn" class="btn-block">💾 Save contest data</button>
               <button id="reloadBtn" class="btn-secondary">↻ Reload</button>
@@ -120,6 +124,13 @@
                 <div class="input-group">
                   <label for="matchAwayInput">Away team</label>
                   <input id="matchAwayInput" type="text" placeholder="Sweden" />
+                </div>
+              </div>
+              <div class="form-row cols-2" style="align-items:center">
+                <label style="margin-right:8px"><input id="matchFirstScorerCheckbox" type="checkbox" /> Enable first-scorer contest for this match</label>
+                <div class="input-group" style="margin-left:8px">
+                  <label for="matchFirstScorerFee" style="display:block">First-scorer fee (optional)</label>
+                  <input id="matchFirstScorerFee" type="number" min="1" step="1" placeholder="Uses default if blank" />
                 </div>
               </div>
               <button id="addMatchBtn" class="btn-block">+ Add Match</button>
