@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#071018" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>LSG FIFA Contest — Results</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand-icon" aria-hidden="true">⚽</div>
+      <div class="brand-text">
+        <strong>LSG FIFA Contest</strong>
+        <span>Round of 32 · Live Results</span>
+      </div>
+    </div>
+    <a href="admin.html" class="nav-link admin">Admin</a>
+  </header>
+
+  <main class="page-layout">
+    <div class="grid">
+      <div id="statusBar" class="status-bar">Loading contest data…</div>
+
+      <div class="collapse-toolbar">
+        <button type="button" id="expandAllBtn" class="toolbar-btn">Expand all</button>
+        <button type="button" id="collapseAllBtn" class="toolbar-btn">Collapse all</button>
+      </div>
+
+      <details class="hero-card collapsible-card" data-section="hero" open>
+        <summary class="card-summary hero-summary">
+          <span class="card-summary-text">
+            <span class="card-title">Contest Leaderboard</span>
+          </span>
+          <span class="card-chevron" aria-hidden="true">▼</span>
+        </summary>
+        <div class="card-body hero-body">
+          <p class="sub" id="betSummary"></p>
+          <p class="last-updated" id="lastUpdated"></p>
+          <div class="kpi">
+            <div class="kpi-item">
+              <div class="label">Players</div>
+              <div class="value" id="kpiParticipants">0</div>
+            </div>
+            <div class="kpi-item">
+              <div class="label">Total Pool</div>
+              <div class="value" id="kpiPool">₹0</div>
+            </div>
+            <div class="kpi-item">
+              <div class="label">Results In</div>
+              <div class="value" id="kpiDone">0</div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="card collapsible-card" data-section="participants" open>
+        <summary class="card-summary">
+          <span class="card-summary-text">
+            <span class="section-icon" aria-hidden="true">👥</span>
+            <span class="card-title">Participants</span>
+          </span>
+          <span class="card-chevron" aria-hidden="true">▼</span>
+        </summary>
+        <div class="card-body">
+          <div id="participantsChips" class="participants-grid"></div>
+        </div>
+      </details>
+
+      <details class="card collapsible-card" data-section="fixtures" open>
+        <summary class="card-summary">
+          <span class="card-summary-text">
+            <span class="section-icon" aria-hidden="true">🏟️</span>
+            <span class="card-title">Fixtures &amp; Predictions</span>
+          </span>
+          <span class="card-chevron" aria-hidden="true">▼</span>
+        </summary>
+        <div class="card-body">
+          <p class="section-desc">Tap a match to see predictions and results.</p>
+          <div class="fixture-toolbar">
+            <button type="button" class="toolbar-btn" data-action="expand-fixtures">Open matches</button>
+            <button type="button" class="toolbar-btn" data-action="collapse-fixtures">Close matches</button>
+          </div>
+          <div id="fixtures" class="fixtures"></div>
+        </div>
+      </details>
+
+      <details class="card collapsible-card" data-section="payout" open>
+        <summary class="card-summary">
+          <span class="card-summary-text">
+            <span class="section-icon" aria-hidden="true">💰</span>
+            <span class="card-title">Payout by Match</span>
+          </span>
+          <span class="card-chevron" aria-hidden="true">▼</span>
+        </summary>
+        <div class="card-body">
+          <div class="table-wrap">
+            <table id="matchPayoutTable" class="mobile-cards">
+              <thead>
+                <tr>
+                  <th>Match</th>
+                  <th>Result</th>
+                  <th>Winners</th>
+                  <th>Pool</th>
+                  <th>Payout</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <details class="card collapsible-card" data-section="winnings" open>
+        <summary class="card-summary">
+          <span class="card-summary-text">
+            <span class="section-icon" aria-hidden="true">🏆</span>
+            <span class="card-title">Contestant Winnings</span>
+          </span>
+          <span class="card-chevron" aria-hidden="true">▼</span>
+        </summary>
+        <div class="card-body">
+          <div class="table-wrap">
+            <table id="contestantTable" class="mobile-cards">
+              <thead>
+                <tr>
+                  <th>Contestant</th>
+                  <th>Fan</th>
+                  <th>Correct</th>
+                  <th>Won</th>
+                  <th id="netStakeHeader">Net</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+    </div>
+  </main>
+
+  <script type="module" src="js/user-app.js"></script>
+</body>
+</html>

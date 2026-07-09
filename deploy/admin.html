@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#071018" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>LSG FIFA Contest — Admin</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand-icon" aria-hidden="true">⚽</div>
+      <div class="brand-text">
+        <strong>Contest Admin</strong>
+        <span>Manage players &amp; matches</span>
+      </div>
+    </div>
+    <a href="index.html" class="nav-link">Results</a>
+  </header>
+
+  <main class="page-layout">
+    <div class="grid">
+      <div id="statusBar" class="status-bar">Loading…</div>
+
+      <div class="collapse-toolbar">
+        <button type="button" id="expandAllBtn" class="toolbar-btn">Expand all</button>
+        <button type="button" id="collapseAllBtn" class="toolbar-btn">Collapse all</button>
+      </div>
+
+      <details class="hero-card collapsible-card" data-section="hero" open>
+        <summary class="card-summary hero-summary">
+          <span class="card-summary-text">
+            <span class="card-title">Admin Dashboard</span>
+          </span>
+          <span class="card-chevron" aria-hidden="true">▼</span>
+        </summary>
+        <div class="card-body hero-body">
+          <p class="sub" id="betSummary"></p>
+          <div class="admin-toolbar">
+            <div class="bet-control">
+              <label for="betAmountInput"><strong>Bet / match (₹)</strong></label>
+              <input id="betAmountInput" type="number" min="1" step="1" value="20" />
+            </div>
+            <div class="btn-row">
+              <button id="saveBtn" class="btn-block">💾 Save contest data</button>
+              <button id="reloadBtn" class="btn-secondary">↻ Reload</button>
+              <button id="resetBtn" class="btn-danger">Reset All</button>
+            </div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-item">
+              <div class="label">Players</div>
+              <div class="value" id="kpiParticipants">0</div>
+            </div>
+            <div class="kpi-item">
+              <div class="label">Total Pool</div>
+              <div class="value" id="kpiPool">₹0</div>
+            </div>
+            <div class="kpi-item">
+              <div class="label">Results In</div>
+              <div class="value" id="kpiDone">0</div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="card collapsible-card" data-section="participants" open>
+        <summary class="card-summary">
+          <span class="card-summary-text">
+            <span class="section-icon" aria-hidden="true">👤</span>
+            <span class="card-title">Add Participant</span>
+          </span>
+          <span class="card-chevron" aria-hidden="true">▼</span>
+        </summary>
+        <div class="card-body">
+          <div class="form-stack">
+            <div class="form-row cols-2">
+              <div class="input-group">
+                <label for="participantInput">Name</label>
+                <input id="participantInput" type="text" placeholder="Full name" autocomplete="name" />
+              </div>
+              <div class="input-group">
+                <label for="fanCountryInput">Fan country</label>
+                <input id="fanCountryInput" type="text" placeholder="e.g. Brazil" />
+              </div>
+            </div>
+            <button id="addParticipantBtn" class="btn-block">+ Add Participant</button>
+          </div>
+          <div id="participantsChips" class="participants-grid" style="margin-top:14px"></div>
+        </div>
+      </details>
+
+      <details class="card collapsible-card" data-section="matches" open>
+        <summary class="card-summary">
+          <span class="card-summary-text">
+            <span class="section-icon" aria-hidden="true">📅</span>
+            <span class="card-title">Add Match</span>
+          </span>
+          <span class="card-chevron" aria-hidden="true">▼</span>
+        </summary>
+        <div class="card-body">
+          <div class="match-form">
+            <div class="form-stack">
+              <div class="form-row cols-2">
+                <div class="input-group">
+                  <label for="matchIdInput">Match ID</label>
+                  <input id="matchIdInput" type="number" placeholder="Auto" />
+                </div>
+                <div class="input-group">
+                  <label for="matchTimeInput">Kick-off time</label>
+                  <input id="matchTimeInput" type="text" placeholder="1 Jul, 2:30 AM IST" />
+                </div>
+              </div>
+              <div class="form-row cols-2">
+                <div class="input-group">
+                  <label for="matchHomeInput">Home team</label>
+                  <input id="matchHomeInput" type="text" placeholder="France" />
+                </div>
+                <div class="input-group">
+                  <label for="matchAwayInput">Away team</label>
+                  <input id="matchAwayInput" type="text" placeholder="Sweden" />
+                </div>
+              </div>
+              <button id="addMatchBtn" class="btn-block">+ Add Match</button>
+            </div>
+          </div>
+          <div id="matchList" class="match-list"></div>
+        </div>
+      </details>
+
+      <details class="card collapsible-card" data-section="fixtures" open>
+        <summary class="card-summary">
+          <span class="card-summary-text">
+            <span class="section-icon" aria-hidden="true">🏟️</span>
+            <span class="card-title">Predictions &amp; Results</span>
+          </span>
+          <span class="card-chevron" aria-hidden="true">▼</span>
+        </summary>
+        <div class="card-body">
+          <p class="section-desc">Set match results and player predictions, then save.</p>
+          <div class="fixture-toolbar">
+            <button type="button" class="toolbar-btn" data-action="expand-fixtures">Open matches</button>
+            <button type="button" class="toolbar-btn" data-action="collapse-fixtures">Close matches</button>
+          </div>
+          <div id="fixtures" class="fixtures"></div>
+        </div>
+      </details>
+
+      <details class="card collapsible-card" data-section="payout" open>
+        <summary class="card-summary">
+          <span class="card-summary-text">
+            <span class="section-icon" aria-hidden="true">💰</span>
+            <span class="card-title">Payout by Match</span>
+          </span>
+          <span class="card-chevron" aria-hidden="true">▼</span>
+        </summary>
+        <div class="card-body">
+          <div class="table-wrap">
+            <table id="matchPayoutTable" class="mobile-cards">
+              <thead>
+                <tr>
+                  <th>Match</th>
+                  <th>Result</th>
+                  <th>Winners</th>
+                  <th>Pool</th>
+                  <th>Payout</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <details class="card collapsible-card" data-section="winnings" open>
+        <summary class="card-summary">
+          <span class="card-summary-text">
+            <span class="section-icon" aria-hidden="true">🏆</span>
+            <span class="card-title">Contestant Winnings</span>
+          </span>
+          <span class="card-chevron" aria-hidden="true">▼</span>
+        </summary>
+        <div class="card-body">
+          <div class="table-wrap">
+            <table id="contestantTable" class="mobile-cards">
+              <thead>
+                <tr>
+                  <th>Contestant</th>
+                  <th>Fan</th>
+                  <th>Correct</th>
+                  <th>Won</th>
+                  <th id="netStakeHeader">Net</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+    </div>
+  </main>
+
+  <script type="module" src="js/admin-app.js"></script>
+</body>
+</html>
